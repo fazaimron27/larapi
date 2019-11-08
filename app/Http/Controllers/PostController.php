@@ -40,4 +40,15 @@ class PostController extends Controller
             ->transformWith(new PostTransformer)
             ->toArray();
     }
+
+    public function delete(Post $post)
+    {
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return response()->json([
+            'message' => 'Post Deleted'
+        ]);
+    }
 }
